@@ -28,4 +28,7 @@ plt.grid(which="minor", linestyle=":", linewidth=0.5)
 plt.gca().minorticks_on()
 plt.xlabel("Energie in Teilsystem A")
 plt.ylabel("Anzahl der Zustände")
-plt.show()
+if len(argv) > 4:
+    plt.savefig(argv[4], dpi=250)
+else:
+    plt.show()
