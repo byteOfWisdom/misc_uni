@@ -30,7 +30,7 @@ def main():
     std.default.plt_pretty("$\\epsilon$", "G")
     plt.legend()
     plt.title("Relativistisch")
-    plt.savefig("clasical.pdf")
+    plt.savefig("relativistic.pdf")
     # plt.show()
 
 
