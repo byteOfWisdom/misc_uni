@@ -175,7 +175,7 @@ plt.show()
 # %%
 # Your solution here
 plt.scatter(dataset["A"], dataset["B"], marker="x")
-plt_pretty("B", "A")
+plt_pretty("A", "B")
 plt.show()
 
 # %% [markdown]
