@@ -54,8 +54,8 @@ print(f"lambda_estimate / n = {lambda_estimate / len(ks)}")
 # %% [markdown]
 # task d)
 # bootstrap method for calculating variance of $\hat{\lambda}$
-# the values for the bootstrapped variance of $\hat{\lambda}$ is slightly greater then the analytical variance of $\hat{\lambda} / n$
-# which is in turn slightly bigger the the cramer-rao lower bound. This makes sense as the lower bound is the minimal value and all other are actually bigger and the bootstrap method slightly overestimates the analytical sigma due to relatively finite dataset count
+# the value for the bootstrapped variance of $\hat{\lambda}$  is similar to the analytical variance of $\hat{\lambda} / n$
+# which is in turn similar to the the cramer-rao lower bound.
 
 # %%
 n_points, n_datasets = 100, 1000
