@@ -29,6 +29,7 @@ except Exception as _:
 
 
 # %% [markdown]
+# # task b)
 # calculating $\hat{\lambda}$ as defined in the handwritten part of this task
 
 # %%
@@ -39,28 +40,32 @@ print(f"estimated lambda for sample data is {lambda_estimate}")
 # print(counts)
 
 # %% [markdown]
+# # task c)
 # calculating the fisher information for the data
+# as well as the lower bound of variance for $\hat{\lambda}$ as given by the Cramer-Rao inequality
 
 # %%
-# fisher_information = np.var(((ks / lambda_estimate)))
-fisher_information = np.sum(ks / (2 * lambda_estimate * lambda_estimate))
+fisher_information = np.sum(((ks / lambda_estimate) - 1) ** 2)
 print(f"fisher information is {fisher_information}")
 min_variance = 1 / fisher_information
-print(min_variance)
+print(f"minimum variance of lambda_estimate as given by fisher information is {min_variance}")
 print(f"lambda_estimate / n = {lambda_estimate / len(ks)}")
 
-# %% [markdow]
+# %% [markdown]
+# task d)
 # bootstrap method for calculating variance of $\hat{\lambda}$
-# the values for the bootstrapped variance of $\hat{\lambda}$ matches nicely with the analytical variance of $\hat{\lambda} / n$
+# the values for the bootstrapped variance of $\hat{\lambda}$ is slightly greater then the analytical variance of $\hat{\lambda} / n$
+# which is in turn slightly bigger the the cramer-rao lower bound. This makes sense as the lower bound is the minimal value and all other are actually bigger and the bootstrap method slightly overestimates the analytical sigma due to relatively finite dataset count
 
 # %%
 n_points, n_datasets = 100, 1000
 samples = np.random.poisson(lambda_estimate, (n_points, n_datasets))
 bootstrap_lambda = np.sum(samples, axis=0) / n_points
 variance_lambda = np.var(bootstrap_lambda)
-print(f"the variance of lambda_hat via bootstrapping is {variance_lambda}")
+print(f"the variance of lambda_estimate via bootstrapping is {variance_lambda}")
 
 # %% [markdown]
+# task e)
 # making a freqency table and plotting that together with the expected distribution
 # it appears to match up quite well
 
