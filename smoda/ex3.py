@@ -38,8 +38,20 @@ print(f"estimated lambda for sample data is {lambda_estimate}")
 
 # print(counts)
 
+# %% [markdown]
+# calculating the fisher information for the data
+
+# %%
+# fisher_information = np.var(((ks / lambda_estimate)))
+fisher_information = np.sum(ks / (2 * lambda_estimate * lambda_estimate))
+print(f"fisher information is {fisher_information}")
+min_variance = 1 / fisher_information
+print(min_variance)
+print(f"lambda_estimate / n = {lambda_estimate / len(ks)}")
+
 # %% [markdow]
-# bootstrap method for calculating variance of lambda
+# bootstrap method for calculating variance of $\hat{\lambda}$
+# the values for the bootstrapped variance of $\hat{\lambda}$ matches nicely with the analytical variance of $\hat{\lambda} / n$
 
 # %%
 n_points, n_datasets = 100, 1000
@@ -50,12 +62,16 @@ print(f"the variance of lambda_hat via bootstrapping is {variance_lambda}")
 
 # %% [markdown]
 # making a freqency table and plotting that together with the expected distribution
+# it appears to match up quite well
 
 # %%
+eb_params = {"fmt": " ", "elinewidth": 0.75, "capsize": 5}
 x = np.arange(0, max(ks) + 1)
 y = 100 * (lambda_estimate ** x) * np.exp(-lambda_estimate) / scipy.special.factorial(x)
 freqs, bins = np.histogram(ks, bins=max(ks) + 1, range=(0 -0.5, max(ks) + 0.5))
-plt.stairs(freqs, bins, label="measured frequecies")
-plt.stairs(y, bins, label="measured frequecies")
-plt_pretty("", "")
+plt.stairs(freqs, bins, label="measured frequecies", linewidth=2, color="blue")
+plt.stairs(y, bins, label="measured frequecies", linewidth=2, color="green")
+plt.errorbar(np.arange(0, 11), y, yerr=np.sqrt(y), **eb_params, color="green")
+plt.errorbar(np.arange(0, 11), freqs, yerr=np.sqrt(freqs), **eb_params, color="blue")
+plt_pretty("count", "frequecy")
 plt.show()
